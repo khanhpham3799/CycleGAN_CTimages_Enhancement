@@ -6,8 +6,11 @@ This is the modified of CycleGAN model for AAPM dataset for CT image enhancement
 
 ## Image preprocessing transformation:
 Transform to HU unit and truncated from -1000HU:
+
     image = 1000*(image-0.0194)/0.0194
+
     image = np.where(image<-1000,-1000,image)
+    
     image = image/4000
 
 ## Image enhancement result 
