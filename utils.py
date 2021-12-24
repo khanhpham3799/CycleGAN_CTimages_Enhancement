@@ -10,11 +10,16 @@ def LSGAN_D(real, fake):
 def LSGAN_G(fake):
   return  torch.mean((fake - 1)**2)
 
-def PSNR(img1,img2):
-    mse = torch.mean((img1 - img2) ** 2)
-    #both image is normalized to range 0-1
-    return 20 * torch.log10(1 / torch.sqrt(mse))
-      
+def PSNR(img1,img2,range_value):
+    mse = torch.mean((img1 - img2)**2)
+    '''
+    if torch.max(img1) > torch.max(img2):
+      return 20 * torch.log10(torch.max(img1)/ torch.sqrt(mse))
+    else:
+      return 20 * torch.log10(torch.max(img2)/ torch.sqrt(mse))
+    '''
+    return 20 * torch.log10(range_value/ torch.sqrt(mse))
+    
 def get_loaders(
     get_dir,
     batch_size,
